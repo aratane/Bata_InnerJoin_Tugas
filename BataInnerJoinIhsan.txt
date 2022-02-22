@@ -1,0 +1,178 @@
+Nama : Ihsan Maulana
+Kelas : XI-RPL
+
+Jawaban No 1 :
+
+MariaDB [pesanan]> select produk.id_produk, produk.nm_produk,
+    ->  pesan.tgl_pesan,
+    -> detil_pesan.id_pesan
+    -> from produk, pesan, detil_pesan
+    -> where produk.id_produk = detil_pesan.id_produk;
++-----------+----------------+------------+----------+
+| id_produk | nm_produk      | tgl_pesan  | id_pesan |
++-----------+----------------+------------+----------+
+| B04       | Ram Laptop 8Gb | 2022-02-01 | P01      |
+| B01       | Keyboard       | 2022-02-01 | P04      |
+| B04       | Ram Laptop 8Gb | 2022-02-02 | P01      |
+| B01       | Keyboard       | 2022-02-02 | P04      |
+| B04       | Ram Laptop 8Gb | 2022-02-03 | P01      |
+| B01       | Keyboard       | 2022-02-03 | P04      |
+| B04       | Ram Laptop 8Gb | 2022-02-04 | P01      |
+| B01       | Keyboard       | 2022-02-04 | P04      |
++-----------+----------------+------------+----------+
+8 rows in set (0.000 sec)
+
+MariaDB [pesanan]>
+
+PENJELASAN : 
+Pada jawaban nomor 1 hanya menampilkan produk yang dipesan hasil dari penggabungan (inner join)
+tabel :
+produk = tabel produk memanggil primary key nya yaitu id_produk untuk inner join dengan detil_pesan.
+pesan = tabel pesan hanya memanggil field tgl_pesan karena id_pesan sudah dijadikan foreign key pada detil_pesan.
+detil_pesan = tabel detil_pesan menerima perintah penggabungan dengan memanggil id_pesan lalu menyatukan dengan tabel produk dengan dipanggil pada perintah detil_pesan.id_produk.
+
+Maaf jika salah bu, ini aku hanya mencoba mengeluarkan isi pikiranku tentang pembelajaran kali ini :)
+
+Jawaban No 2 : 
+
+MariaDB [pesanan]> select produk.id_produk, produk.nm_produk,
+    -> pesan.id_pesan, pesan.tgl_pesan,
+    -> pelanggan.id_pelanggan, pelanggan.nm_pelanggan,
+    -> detil_pesan.jumlah, kuitansi.id_kuitansi
+    -> from produk, pesan, pelanggan, detil_pesan, kuitansi
+    -> where produk.id_produk = detil_pesan.id_produk;
++-----------+----------------+----------+------------+--------------+---------------+--------+-------------+
+| id_produk | nm_produk      | id_pesan | tgl_pesan  | id_pelanggan | nm_pelanggan  | jumlah | id_kuitansi |
++-----------+----------------+----------+------------+--------------+---------------+--------+-------------+
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M01          | Ihsan Maulana |     10 | K01         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M01          | Ihsan Maulana |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M01          | Ihsan Maulana |     10 | K01         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M01          | Ihsan Maulana |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M01          | Ihsan Maulana |     10 | K01         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M01          | Ihsan Maulana |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M01          | Ihsan Maulana |     10 | K01         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M01          | Ihsan Maulana |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M02          | Ilham Nugraha |     10 | K01         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M02          | Ilham Nugraha |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M02          | Ilham Nugraha |     10 | K01         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M02          | Ilham Nugraha |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M02          | Ilham Nugraha |     10 | K01         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M02          | Ilham Nugraha |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M02          | Ilham Nugraha |     10 | K01         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M02          | Ilham Nugraha |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M03          | David         |     10 | K01         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M03          | David         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M03          | David         |     10 | K01         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M03          | David         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M03          | David         |     10 | K01         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M03          | David         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M03          | David         |     10 | K01         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M03          | David         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M04          | Bruno         |     10 | K01         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M04          | Bruno         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M04          | Bruno         |     10 | K01         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M04          | Bruno         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M04          | Bruno         |     10 | K01         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M04          | Bruno         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M04          | Bruno         |     10 | K01         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M04          | Bruno         |      5 | K01         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M01          | Ihsan Maulana |     10 | K02         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M01          | Ihsan Maulana |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M01          | Ihsan Maulana |     10 | K02         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M01          | Ihsan Maulana |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M01          | Ihsan Maulana |     10 | K02         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M01          | Ihsan Maulana |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M01          | Ihsan Maulana |     10 | K02         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M01          | Ihsan Maulana |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M02          | Ilham Nugraha |     10 | K02         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M02          | Ilham Nugraha |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M02          | Ilham Nugraha |     10 | K02         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M02          | Ilham Nugraha |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M02          | Ilham Nugraha |     10 | K02         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M02          | Ilham Nugraha |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M02          | Ilham Nugraha |     10 | K02         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M02          | Ilham Nugraha |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M03          | David         |     10 | K02         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M03          | David         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M03          | David         |     10 | K02         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M03          | David         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M03          | David         |     10 | K02         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M03          | David         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M03          | David         |     10 | K02         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M03          | David         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M04          | Bruno         |     10 | K02         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M04          | Bruno         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M04          | Bruno         |     10 | K02         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M04          | Bruno         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M04          | Bruno         |     10 | K02         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M04          | Bruno         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M04          | Bruno         |     10 | K02         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M04          | Bruno         |      5 | K02         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M01          | Ihsan Maulana |     10 | K03         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M01          | Ihsan Maulana |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M01          | Ihsan Maulana |     10 | K03         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M01          | Ihsan Maulana |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M01          | Ihsan Maulana |     10 | K03         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M01          | Ihsan Maulana |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M01          | Ihsan Maulana |     10 | K03         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M01          | Ihsan Maulana |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M02          | Ilham Nugraha |     10 | K03         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M02          | Ilham Nugraha |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M02          | Ilham Nugraha |     10 | K03         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M02          | Ilham Nugraha |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M02          | Ilham Nugraha |     10 | K03         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M02          | Ilham Nugraha |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M02          | Ilham Nugraha |     10 | K03         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M02          | Ilham Nugraha |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M03          | David         |     10 | K03         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M03          | David         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M03          | David         |     10 | K03         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M03          | David         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M03          | David         |     10 | K03         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M03          | David         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M03          | David         |     10 | K03         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M03          | David         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M04          | Bruno         |     10 | K03         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M04          | Bruno         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M04          | Bruno         |     10 | K03         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M04          | Bruno         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M04          | Bruno         |     10 | K03         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M04          | Bruno         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M04          | Bruno         |     10 | K03         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M04          | Bruno         |      5 | K03         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M01          | Ihsan Maulana |     10 | K04         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M01          | Ihsan Maulana |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M01          | Ihsan Maulana |     10 | K04         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M01          | Ihsan Maulana |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M01          | Ihsan Maulana |     10 | K04         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M01          | Ihsan Maulana |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M01          | Ihsan Maulana |     10 | K04         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M01          | Ihsan Maulana |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M02          | Ilham Nugraha |     10 | K04         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M02          | Ilham Nugraha |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M02          | Ilham Nugraha |     10 | K04         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M02          | Ilham Nugraha |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M02          | Ilham Nugraha |     10 | K04         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M02          | Ilham Nugraha |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M02          | Ilham Nugraha |     10 | K04         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M02          | Ilham Nugraha |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M03          | David         |     10 | K04         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M03          | David         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M03          | David         |     10 | K04         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M03          | David         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M03          | David         |     10 | K04         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M03          | David         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M03          | David         |     10 | K04         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M03          | David         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P01      | 2022-02-01 | M04          | Bruno         |     10 | K04         |
+| B01       | Keyboard       | P01      | 2022-02-01 | M04          | Bruno         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P02      | 2022-02-02 | M04          | Bruno         |     10 | K04         |
+| B01       | Keyboard       | P02      | 2022-02-02 | M04          | Bruno         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P03      | 2022-02-03 | M04          | Bruno         |     10 | K04         |
+| B01       | Keyboard       | P03      | 2022-02-03 | M04          | Bruno         |      5 | K04         |
+| B04       | Ram Laptop 8Gb | P04      | 2022-02-04 | M04          | Bruno         |     10 | K04         |
+| B01       | Keyboard       | P04      | 2022-02-04 | M04          | Bruno         |      5 | K04         |
++-----------+----------------+----------+------------+--------------+---------------+--------+-------------+
+128 rows in set (0.001 sec)
+
+PENJELASAN : Terlalu panjang untuk di jelaskan hhe, nanti aja deh :D
